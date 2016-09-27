@@ -14,19 +14,33 @@ namespace DBPerformancePlay
 			var dbW = new DbWorker();
 			var sw = Stopwatch.StartNew();
 			var tasks = new List<Task>();
-			for (var i = 0; i < 10; i++)
-				dbW.SeedLData(50000);
+			tasks.Add(Task.Run(() =>
+			{
+				dbW.SeedGitUsers(50000);
+			}));
+			tasks.Add(Task.Run(() =>
+			{
+				dbW.SeedGitUsers(50000);
+			}));
+			tasks.Add(Task.Run(() =>
+			{
+				dbW.SeedGitUsers(50000);
+			}));
 			//tasks.Add(Task.Run(() =>
 			//{
-			//	dbW.SeedLData(50000);
+			//	dbW.SeedGitUsers(50000);
 			//}));
 			//tasks.Add(Task.Run(() =>
 			//{
-			//	dbW.SeedLData(50000);
+			//	dbW.SeedGitUsers(50000);
 			//}));
 			//tasks.Add(Task.Run(() =>
 			//{
-			//	dbW.SeedLData(50000);
+			//	dbW.SeedGitUsers(50000);
+			//}));
+			//tasks.Add(Task.Run(() =>
+			//{
+			//	dbW.SeedGitUsers(50000);
 			//}));
 			//tasks.Add(Task.Run(() =>
 			//{
