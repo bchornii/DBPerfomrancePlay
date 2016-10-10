@@ -5,14 +5,14 @@ namespace DBPerformancePlay.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<DBPerformancePlay.GitDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<PerfDemo.DAL.GitDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(DBPerformancePlay.GitDbContext context)
+        protected override void Seed(PerfDemo.DAL.GitDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

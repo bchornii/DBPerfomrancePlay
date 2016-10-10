@@ -1,4 +1,4 @@
-namespace DBPerformancePlay
+namespace PerfDemo.DAL.Models
 {
     using System;
     using System.Collections.Generic;

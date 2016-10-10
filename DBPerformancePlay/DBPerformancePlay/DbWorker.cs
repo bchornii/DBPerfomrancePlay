@@ -1,11 +1,13 @@
-﻿using DBPerformancePlay.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FizzWare.NBuilder;
 using EntityFramework.BulkInsert.Extensions;
+using BenchmarkDotNet.Attributes;
+using PerfDemo.DAL.Models;
+using PerfDemo.DAL;
 
 namespace DBPerformancePlay
 {
@@ -19,6 +21,16 @@ namespace DBPerformancePlay
 				return k;
 			}
 		}
+
+		public List<GitHubResume> GetResumes(int count = 50000)
+		{
+			using (var context = new GitDbContext())
+			{
+				var k = context.GitHubResumes.Take(count).ToList();
+				return k;
+			}
+		}
+
 
 		public void SeedLData(int amount = 1000)
 		{

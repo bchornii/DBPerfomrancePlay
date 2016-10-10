@@ -1,4 +1,4 @@
-namespace DBPerformancePlay
+namespace PerfDemo.DAL
 {
 	using System;
 	using System.Data.Entity;

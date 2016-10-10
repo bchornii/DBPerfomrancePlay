@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DBPerformancePlay.Models
+namespace PerfDemo.DAL.Models
 {
 	[Table("LData")]
 	public class LData
@@ -16,8 +16,8 @@ namespace DBPerformancePlay.Models
 
 		public void Randomize()
 		{
-			Rnumber = Helper.R.Next();
-			Rstring = Helper.GetLorem();
+			//Rnumber = Helper.R.Next();
+			//Rstring = Helper.GetLorem();
 		}
 	}
 }

@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>ASP.NET</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Getting started</h2>
+		<div class="request-result">
+
+		</div>
+    </div>
+</div>
+@section scripts{
+	<script>
+	$(function () {
+		function getResumes() {
+			$.ajax({
+				url: "",
+				type: "Get"
+			})
+		}
+	})
+</script>
+
+}
