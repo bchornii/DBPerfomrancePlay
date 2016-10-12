@@ -3,4 +3,4 @@ solution: DBPerformancePlay/DBPerformancePlay.sln
 install:
   - nuget restore DBPerformancePlay/DBPerformancePlay.sln
 script:
-  - xbuild /p:Configuration=Release DBPerformancePlay/DBPerformancePlay.sln
+  - xbuild /p:Configuration=Debug DBPerformancePlay/DBPerformancePlay.sln
