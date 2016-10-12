@@ -1,0 +1,6 @@
+language: csharp
+solution: DBPerformancePlay/DBPerformancePlay.sln
+install:
+  - nuget restore DBPerformancePlay/DBPerformancePlay.sln
+script:
+  - xbuild /p:Configuration=Release DBPerformancePlay/DBPerformancePlay.sln
