@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -38,6 +40,15 @@ namespace WebApp.Controllers
 		{
 			var dbWorker = new DbWorker();
 			return Json(dbWorker.GetResumes(50000), JsonRequestBehavior.AllowGet);
+		}
+
+		public async Task<JsonResult> SessionExampleAsync()
+		{
+			return await Task.Run<JsonResult>(() => {
+				var data = "Stubbed data: " + DateTime.Now;
+				Thread.Sleep(5000);
+				return Json(data, JsonRequestBehavior.AllowGet);
+			});
 		}
 	}
 }

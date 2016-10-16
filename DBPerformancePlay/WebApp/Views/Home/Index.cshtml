@@ -9,21 +9,43 @@
 <div class="row">
     <div class="col-md-12">
         <h2>Getting started</h2>
-		<div class="request-result">
+	    <div class="request-result">
 
-		</div>
+	    </div>
+	    <div>
+		    <button id="DoAjax"> do Ajax calls</button>
+			<span>Make 3 calls to API</span>
+	    </div>
     </div>
 </div>
 @section scripts{
 	<script>
-	$(function () {
-		function getResumes() {
-			$.ajax({
-				url: "",
-				type: "Get"
-			})
-		}
-	})
+		$(function () {
+			var counter = 0;
+			function getResumes() {
+				$.ajax({
+					async: true,
+					url: "@Url.Action("SessionExample", "Data")",
+					type: "Get",
+					success: function(data) {
+						$('.request-result').append("<div class='result'>" + data + "</div>");
+						counter--;
+						if (counter == 0) $('#DoAjax').prop("disabled", false);
+					},
+					error: function() {
+
+					}
+				});
+			}
+
+			$('#DoAjax').click(function () {
+				$('#DoAjax').prop("disabled", true);
+				counter = 3;
+				getResumes();
+				getResumes();
+				getResumes();
+			});
+		})
 </script>
 
 }
