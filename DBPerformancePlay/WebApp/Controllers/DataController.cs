@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PerfDemo.BAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -12,14 +13,14 @@ namespace WebApp.Controllers
 	[SessionState(SessionStateBehavior.ReadOnly)]
 	public class DataController : AsyncController
     {
-		// GET: Data
+		[HttpPost]
 		public async Task<JsonResult> SessionExampleAsync()
 		{
-			return await Task.Run<JsonResult>(() => {
-				var data = "Stubbed data: " + DateTime.Now;
-				Thread.Sleep(5000);
-				return Json(data, JsonRequestBehavior.AllowGet);
+			var res = await Task.Run<string>(() => {
+				var db = new DataBal();
+				return db.StubData();
 			});
+			return Json(res, JsonRequestBehavior.AllowGet);
 		}
 	}
 }

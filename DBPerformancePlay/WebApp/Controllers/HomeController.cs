@@ -1,4 +1,5 @@
 ﻿using DBPerformancePlay;
+using PerfDemo.BAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.SessionState;
 
 namespace WebApp.Controllers
 {
@@ -42,12 +44,33 @@ namespace WebApp.Controllers
 			return Json(dbWorker.GetResumes(50000), JsonRequestBehavior.AllowGet);
 		}
 
+		[HttpPost]
+		public JsonResult SessionExampleSync()
+		{
+			//return await Task.Run<JsonResult>(() => {
+			//Session["tick"] = DateTime.Now.Ticks;
+			var db = new DataBal();
+			return Json(db.StubData(), JsonRequestBehavior.AllowGet);
+			//});
+		}
+
+		[HttpGet]
+		public JsonResult SessionExampleSync(object data)
+		{
+			//return await Task.Run<JsonResult>(() => {
+			//Session["tick"] = DateTime.Now.Ticks;
+			var db = new DataBal();
+			return Json(db.StubData(), JsonRequestBehavior.AllowGet);
+			//});
+		}
+
+		[HttpPost]
 		public async Task<JsonResult> SessionExampleAsync()
 		{
 			return await Task.Run<JsonResult>(() => {
-				var data = "Stubbed data: " + DateTime.Now;
-				Thread.Sleep(5000);
-				return Json(data, JsonRequestBehavior.AllowGet);
+				
+				var db = new DataBal();
+				return Json(db.StubData(), JsonRequestBehavior.AllowGet);
 			});
 		}
 	}

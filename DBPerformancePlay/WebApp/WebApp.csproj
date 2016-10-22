@@ -232,6 +232,10 @@
       <Project>{8C7CDC57-8C9F-46DD-9DD8-A06EF9168F7B}</Project>
       <Name>DBPerformancePlay</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PerfDemo.BAL\PerfDemo.BAL.csproj">
+      <Project>{2701b652-42d5-4051-b28c-3b4174408e2d}</Project>
+      <Name>PerfDemo.BAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PerfDemo.DAL\PerfDemo.DAL.csproj">
       <Project>{89f89733-13ce-4361-8f4c-33d679d946d6}</Project>
       <Name>PerfDemo.DAL</Name>

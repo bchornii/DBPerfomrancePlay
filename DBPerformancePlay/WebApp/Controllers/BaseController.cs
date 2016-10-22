@@ -8,7 +8,7 @@ using WebApp.Models;
 
 namespace WebApp.Controllers
 {
-	public abstract class BaseController : AsyncController
+	public abstract class BaseController : Controller
 	{
 		protected override JsonResult Json(object data, string contentType,
 			Encoding contentEncoding, JsonRequestBehavior behavior)

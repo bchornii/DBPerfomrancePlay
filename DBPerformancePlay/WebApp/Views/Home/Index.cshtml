@@ -13,7 +13,8 @@
 
 	    </div>
 	    <div>
-		    <button id="DoAjax"> do Ajax calls</button>
+		    <button id="DoAjax"> do Ajax POST calls</button>
+			<button id="DoAjaxGet"> do Ajax GET calls</button>
 			<span>Make 3 calls to API</span>
 	    </div>
     </div>
@@ -22,11 +23,11 @@
 	<script>
 		$(function () {
 			var counter = 0;
-			function getResumes() {
+			function getResumes(type) {
 				$.ajax({
 					async: true,
-					url: "@Url.Action("SessionExample", "Data")",
-					type: "Get",
+					url: "@Url.Action("SessionExampleSync", "Home")",
+					type: type,
 					success: function(data) {
 						$('.request-result').append("<div class='result'>" + data + "</div>");
 						counter--;
@@ -41,9 +42,16 @@
 			$('#DoAjax').click(function () {
 				$('#DoAjax').prop("disabled", true);
 				counter = 3;
-				getResumes();
-				getResumes();
-				getResumes();
+				getResumes("POST");
+				getResumes("POST");
+				getResumes("POST");
+			});
+			$('#DoAjaxGet').click(function () {
+				$('#DoAjaxGet').prop("disabled", true);
+				counter = 3;
+				getResumes("GET");
+				getResumes("GET");
+				getResumes("GET");
 			});
 		})
 </script>
