@@ -22,12 +22,22 @@ namespace DBPerformancePlay
 			}
 		}
 
-		public List<GitHubResume> GetResumes(int count = 50000)
+		public List<GitHubResume> GetResumes(int count = 50000, bool notracking = false)
 		{
 			using (var context = new GitDbContext())
 			{
-				var k = context.GitHubResumes.Take(count).ToList();
-				return k;
+				IQueryable<GitHubResume> data;
+				if (notracking) data = context.GitHubResumes.AsNoTracking();
+				else data = context.GitHubResumes;
+				return data.Take(count).ToList();
+			}
+		}
+
+		public int GetResumesCount()
+		{
+			using (var context = new GitDbContext())
+			{
+				return context.GitHubResumes.ToList().Count;
 			}
 		}
 
@@ -56,7 +66,8 @@ namespace DBPerformancePlay
 				.With(c => c.Location = Faker.Address.SecondaryAddress())
 				.With(c => c.Name = Faker.Name.FullName())
 				.With(c => c.Bio = Faker.Lorem.Paragraph(10))
-				.With(c => c.Email = Faker.User.Email()).Build();
+				.With(c => c.Email = Faker.User.Email())
+				.Build();
 
 			using (var context = new GitDbContext())
 			{
@@ -66,6 +77,30 @@ namespace DBPerformancePlay
 				//context.BulkInsert(data);
 				//context.GitHubResumes.AddRange(data);
 				// context.SaveChanges();
+			}
+		}
+
+		public void SeedRandomContact(int count = 100000)
+		{
+			var rand = new Random();
+			using (var context = new GitDbContext())
+			{
+				var ids = context.GitHubResumes.OrderBy(x=>Guid.NewGuid()).Take(count).Select(x => x.Id).ToList();
+				var toSaveList = new List<ContactData>();
+				foreach (var id in ids)
+				{
+					var amount = rand.Next(1, 5);
+					for(var i=0; i<amount; i++)
+					{
+						var cd = new ContactData() { GitHubResumeId = id, ContactType = (ContactType)rand.Next(2) };
+						if (cd.ContactType == ContactType.Address) cd.Data = Faker.Address.SecondaryAddress();
+						else if (cd.ContactType == ContactType.Email) cd.Data = Faker.User.Email();
+						else cd.Data = Faker.Number.RandomNumber(950000000, 959999999).ToString();
+						toSaveList.Add(cd);
+					}
+				}
+				//context.ContactDatas.AddRange(toSaveList)
+				context.BulkInsertAsync(toSaveList).Wait();
 			}
 		}
 

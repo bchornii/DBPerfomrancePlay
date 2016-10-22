@@ -13,16 +13,38 @@ namespace DBPerformancePlay
 		static void Main(string[] args)
 		{
 			var dbW = new DbWorker();
-			var sw = Stopwatch.StartNew();
-			var tasks = new List<Task>();
-			var z = dbW.GetResumes();
-			//z = dbW.GetResumes();
-			//z = dbW.GetResumes();
 
-			//Task.WaitAll(tasks.ToArray());
-			//sw.Stop();
-			//Console.WriteLine($"Time: {sw.ElapsedMilliseconds}");
-			//Console.ReadLine();
+			var tasks = new List<Task>();
+			
+
+			MeasureCall(() =>
+			{
+				dbW.SeedRandomContact();
+			});
+
+			MeasureCall(() =>
+			{
+				var z = dbW.GetResumes(200000);
+			});
+
+			MeasureCall(() =>
+			{
+				var z = dbW.GetResumes(200000);
+			});
+			MeasureCall(() =>
+			{
+				var z = dbW.GetResumes(200000, true);
+			});
+			Console.WriteLine("Done");
+			Console.ReadLine();
+		}
+
+		public static void MeasureCall(Action action)
+		{
+			var sw = Stopwatch.StartNew();
+			action();
+			sw.Stop();
+			Console.WriteLine("ExecutionTime: " + sw.ElapsedMilliseconds);
 		}
 	}
 }

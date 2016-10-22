@@ -54,7 +54,12 @@
     <Compile Include="Migrations\201609271603419_inital.Designer.cs">
       <DependentUpon>201609271603419_inital.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610192028229_ContactData.cs" />
+    <Compile Include="Migrations\201610192028229_ContactData.Designer.cs">
+      <DependentUpon>201610192028229_ContactData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ContactData.cs" />
     <Compile Include="Models\GitHubResume.cs" />
     <Compile Include="Models\GitHubUser.cs" />
     <Compile Include="Models\LData.cs" />
@@ -68,6 +73,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201609271603419_inital.resx">
       <DependentUpon>201609271603419_inital.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610192028229_ContactData.resx">
+      <DependentUpon>201610192028229_ContactData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

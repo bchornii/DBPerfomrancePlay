@@ -16,6 +16,7 @@ namespace PerfDemo.DAL
 		public virtual DbSet<GitHubUser> GitHubUsers { get; set; }
 		public virtual DbSet<PersonSkill> PersonSkills { get; set; }
 		public virtual DbSet<LData> LDatas { get; set; }
+		public virtual DbSet<ContactData> ContactDatas { get; set; }
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{

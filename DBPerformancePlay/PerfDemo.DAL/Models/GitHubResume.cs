@@ -29,5 +29,7 @@ namespace PerfDemo.DAL.Models
         public string Blog { get; set; }
 
         public DateTime? PiplMatchedDate { get; set; }
+
+		public List<ContactData> Contacts { get; set; }
     }
 }
