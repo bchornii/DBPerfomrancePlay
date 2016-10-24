@@ -26,12 +26,12 @@
 			function getResumes(type) {
 				$.ajax({
 					async: true,
-					url: "@Url.Action("SessionExampleSync", "Home")",
+					url: "@Url.Action("SessionExampleASync", "Home")",
 					type: type,
 					success: function(data) {
 						$('.request-result').append("<div class='result'>" + data + "</div>");
 						counter--;
-						if (counter == 0) $('#DoAjax').prop("disabled", false);
+						if (counter == 0) $('#DoAjax, #DoAjaxGet').prop("disabled", false);
 					},
 					error: function() {
 

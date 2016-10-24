@@ -1,0 +1,105 @@
+﻿@model IEnumerable<PerfDemo.DAL.Models.GitHubResume>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+	.glyphicon {
+		cursor: pointer;
+	}
+</style>
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Login)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Company)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Blog)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PiplMatchedDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr data-id="@item.Id">
+        <td>
+            @Html.DisplayFor(modelItem => item.Login)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Company)
+        </td>
+        <td>
+            Bio stub
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Blog)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PiplMatchedDate)
+        </td>
+        <td>
+			<span class="glyphicon glyphicon-remove remove-resume"></span>
+        </td>
+    </tr>
+}
+
+</table>
+@section  scripts{
+	<script>
+		$(function () {
+			function removeResume(id){
+				$.ajax({
+					url: "@Url.Action("Delete", "Resume")",
+					type: "POST",
+					data: { "id": id },
+					success: function (){
+
+					},
+					error: function(){
+
+					}
+
+				});
+			}
+			$(".remove-resume").click(function () {
+				var id = $(this).parent().parent().attr("data-id");
+				removeResume(id);
+				$(this).parent().parent().remove();
+			});
+		});
+	</script>
+}

@@ -48,7 +48,7 @@ namespace WebApp.Controllers
 		public JsonResult SessionExampleSync()
 		{
 			//return await Task.Run<JsonResult>(() => {
-			//Session["tick"] = DateTime.Now.Ticks;
+			Session["tick"] = DateTime.Now.Ticks;
 			var db = new DataBal();
 			return Json(db.StubData(), JsonRequestBehavior.AllowGet);
 			//});
@@ -58,17 +58,16 @@ namespace WebApp.Controllers
 		public JsonResult SessionExampleSync(object data)
 		{
 			//return await Task.Run<JsonResult>(() => {
-			//Session["tick"] = DateTime.Now.Ticks;
 			var db = new DataBal();
 			return Json(db.StubData(), JsonRequestBehavior.AllowGet);
 			//});
 		}
 
-		[HttpPost]
+		[HttpGet]
 		public async Task<JsonResult> SessionExampleAsync()
 		{
 			return await Task.Run<JsonResult>(() => {
-				
+				Session["ticks"] = DateTime.Now.Ticks;
 				var db = new DataBal();
 				return Json(db.StubData(), JsonRequestBehavior.AllowGet);
 			});

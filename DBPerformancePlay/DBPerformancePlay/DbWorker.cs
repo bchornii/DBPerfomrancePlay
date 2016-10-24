@@ -22,6 +22,13 @@ namespace DBPerformancePlay
 			}
 		}
 
+		public List<GitHubResume> GetAllResumes()
+		{
+			using (var context = new GitDbContext())
+			{
+				return context.GitHubResumes.ToList();
+			}
+		}
 		public List<GitHubResume> GetResumes(int count = 50000, bool notracking = false)
 		{
 			using (var context = new GitDbContext())
@@ -104,5 +111,18 @@ namespace DBPerformancePlay
 			}
 		}
 
+		public bool RemoveResume(int id, bool tuned = false)
+		{
+			using (var context = new GitDbContext())
+			{
+				if (!tuned)
+				{
+					var item = context.GitHubResumes.Find(id);
+					context.GitHubResumes.Remove(item);
+					context.SaveChanges();
+				}
+			}
+			return true;
+		}
 	}
 }
