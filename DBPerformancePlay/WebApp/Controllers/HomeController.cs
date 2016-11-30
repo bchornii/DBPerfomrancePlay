@@ -3,6 +3,7 @@ using PerfDemo.BAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Caching;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
@@ -40,6 +41,7 @@ namespace WebApp.Controllers
 		[OutputCache(Duration = 30, VaryByParam = "none")]
 		public JsonResult Resumes(int count = 50000)
 		{
+			MemoryCache.Default.Add(new CacheItem("asd", "asd"), new CacheItemPolicy());
 			var dbWorker = new DbWorker();
 			return Json(dbWorker.GetResumes(50000), JsonRequestBehavior.AllowGet);
 		}
