@@ -17,6 +17,23 @@ namespace WebApp.Controllers
             return View(rm.Get(100, true));
         }
 
+		public ActionResult Dashboard()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public int GetCountSlow()
+		{
+			return rm.GetResumesCount();
+		}
+
+		[HttpPost]
+		public int GetCountFast()
+		{
+			return rm.GetResumesCount(true);
+		}
+
 		[HttpPost]
 		public JsonResult Delete(int id)
 		{

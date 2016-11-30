@@ -40,11 +40,14 @@ namespace DBPerformancePlay
 			}
 		}
 
-		public int GetResumesCount()
+		public int GetResumesCount(bool fast = false)
 		{
 			using (var context = new GitDbContext())
 			{
-				return context.GitHubResumes.ToList().Count;
+				if (fast)
+					return context.GitHubResumes.Count();
+				else 
+					return context.GitHubResumes.ToList().Count;
 			}
 		}
 

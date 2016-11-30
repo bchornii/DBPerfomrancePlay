@@ -1,0 +1,36 @@
+﻿<div>
+	<button class="getSlow btn"> Get Resumes count slow</button>
+	<div>Count: <span></span></div>
+</div>
+<div>
+	<button class="getFast btn"> Get Resumes count fast</button>
+	<div>Count: <span></span></div>
+</div>
+@section  scripts{
+<script>
+	$(document).ready(function () {
+		var getCount = function (url, elem) {
+			$.ajax({
+				url: url,
+				type: "POST",
+				success: function (data) {
+					$(elem).parent().find("span").text(data);
+				},
+				error: function () {
+
+				}
+			});
+		}
+
+		$('.getSlow').click(function () {
+			getCount("@Url.Action("GetCountSlow", "Resume")", this);
+		});
+		$('.getFast').click(function () {
+			getCount("@Url.Action("GetCountFast", "Resume")", this);
+		})
+
+
+
+	});
+</script>
+	}
