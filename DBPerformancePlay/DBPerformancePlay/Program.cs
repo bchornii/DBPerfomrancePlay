@@ -14,27 +14,29 @@ namespace DBPerformancePlay
 		{
 			var dbW = new DbWorker();
 
+			var data = dbW.ExecuteComplexQuery();
+
 			var tasks = new List<Task>();
 			
 
-			MeasureCall(() =>
-			{
-				dbW.SeedRandomContact();
-			});
+			//MeasureCall(() =>
+			//{
+			//	dbW.SeedRandomContact();
+			//});
 
-			MeasureCall(() =>
-			{
-				var z = dbW.GetResumes(200000);
-			});
+			//MeasureCall(() =>
+			//{
+			//	var z = dbW.GetResumes(200000);
+			//});
 
-			MeasureCall(() =>
-			{
-				var z = dbW.GetResumes(200000);
-			});
-			MeasureCall(() =>
-			{
-				var z = dbW.GetResumes(200000, true);
-			});
+			//MeasureCall(() =>
+			//{
+			//	var z = dbW.GetResumes(200000);
+			//});
+			//MeasureCall(() =>
+			//{
+			//	var z = dbW.GetResumes(200000, true);
+			//});
 			Console.WriteLine("Done");
 			Console.ReadLine();
 		}

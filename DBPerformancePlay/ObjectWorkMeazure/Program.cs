@@ -13,10 +13,6 @@ namespace ObjectWorkMeazure
 	{
 		static void Main(string[] args)
 		{
-			var z = GetNumbers();
-			foreach (var k in z) Console.WriteLine(k);
-			Console.ReadLine();
-			return;
 
 			var client = new RestClient("http://localhost/WebApp/home/");
 			var request = new RestRequest("Resumes", Method.GET);
@@ -30,18 +26,6 @@ namespace ObjectWorkMeazure
 				end = Console.ReadLine();
 			} while (String.IsNullOrEmpty(end));
 			
-		}
-
-		private static IEnumerable<int> GetNumbers()
-		{
-			var number = 0;
-			while (true)
-			{
-				if (number > 10)
-					yield break;
-
-				yield return number++;
-			}
 		}
 	}
 }
