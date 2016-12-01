@@ -127,5 +127,30 @@ namespace DBPerformancePlay
 			}
 			return true;
 		}
+
+		/// <summary>
+		/// Get Resumes with complex sql logic that should take some time
+		/// </summary>
+		/// <returns></returns>
+		public List<GitHubResume> ResumesByComplexQuery()
+		{
+			using (var context = new GitDbContext())
+			{
+				var result = context.GitHubResumes.SqlQuery("Select * FROM GitHubResume WHERE PiplMatchedDate IN (SELECT top 100 PiplMatchedDate From GitHubResume ORDER BY NEWID())").ToList();
+				return result;
+			}
+		}
+
+		// <summary>
+		/// Get Resumes with complex sql logic that should take some time
+		/// </summary>
+		/// <returns></returns>
+		public int ExecuteComplexQuery()
+		{
+			using (var context = new GitDbContext())
+			{
+				return context.Database.ExecuteSqlCommand("Select * FROM GitHubResume WHERE PiplMatchedDate IN (SELECT top 1000 PiplMatchedDate From GitHubResume ORDER BY NEWID())");
+			}
+		}
 	}
 }
