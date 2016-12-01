@@ -23,17 +23,17 @@
 	<script>
 		$(function () {
 			var counter = 0;
-			function getResumes(type) {
+			function getResumes(type, url) {
 				$.ajax({
 					async: true,
-					url: "@Url.Action("SessionExampleASync", "Home")",
+					url: url,
 					type: type,
-					success: function(data) {
+					success: function (data) {
 						$('.request-result').append("<div class='result'>" + data + "</div>");
 						counter--;
 						if (counter == 0) $('#DoAjax, #DoAjaxGet').prop("disabled", false);
 					},
-					error: function() {
+					error: function () {
 
 					}
 				});
@@ -42,16 +42,18 @@
 			$('#DoAjax').click(function () {
 				$('#DoAjax').prop("disabled", true);
 				counter = 3;
-				getResumes("POST");
-				getResumes("POST");
-				getResumes("POST");
+				var url = "@Url.Action("SessionExampleSync", "Home")";
+				getResumes("POST", url);
+				getResumes("POST", url);
+				getResumes("POST", url);
 			});
 			$('#DoAjaxGet').click(function () {
 				$('#DoAjaxGet').prop("disabled", true);
 				counter = 3;
-				getResumes("GET");
-				getResumes("GET");
-				getResumes("GET");
+				var url = "@Url.Action("SessionExampleAsync", "Home")";
+				getResumes("GET", url);
+				getResumes("GET", url);
+				getResumes("GET", url);
 			});
 		})
 </script>
