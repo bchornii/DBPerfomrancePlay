@@ -68,7 +68,7 @@ namespace DBPerformancePlay
 			}
 		}
 
-		public void SeedGitUsers(int amount = 10000)
+		public void SeedGitUsers(int amount = 10000, bool tuned = false)
 		{
 			var data = Builder<GitHubResume>.CreateListOfSize(amount).All()
 				.With(c => c.PiplMatchedDate = Faker.Date.Past())
@@ -81,7 +81,14 @@ namespace DBPerformancePlay
 
 			using (var context = new GitDbContext())
 			{
-				context.BulkInsertAsync(data, amount).Wait();
+				if (tuned)
+				{
+					context.BulkInsertAsync(data, amount).Wait();
+				} else
+				{
+					context.GitHubResumes.AddRange(data);
+					context.SaveChanges();
+				}
 				// EFBatchOperation.For(context, context.GitHubResumes).InsertAll(data);
 				//context.AttachAndModify(data);
 				//context.BulkInsert(data);
