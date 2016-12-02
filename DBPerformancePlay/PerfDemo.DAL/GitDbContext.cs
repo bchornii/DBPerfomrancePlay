@@ -10,6 +10,7 @@ namespace PerfDemo.DAL
 		public GitDbContext()
 			: base("name=GitInfoDB")
 		{
+			this.Configuration.LazyLoadingEnabled = true;
 		}
 
 		public virtual DbSet<GitHubResume> GitHubResumes { get; set; }

@@ -60,7 +60,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pre\NplusOne.cs" />
     <Compile Include="Pre\One_SeedData.cs" />
+    <Compile Include="Pre\Two_LongRequestSim.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -72,6 +74,10 @@
     <ProjectReference Include="..\DBPerformancePlay\DBPerformancePlay.csproj">
       <Project>{8c7cdc57-8c9f-46dd-9dd8-a06ef9168f7b}</Project>
       <Name>DBPerformancePlay</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PerfDemo.DAL\PerfDemo.DAL.csproj">
+      <Project>{89F89733-13CE-4361-8F4C-33D679D946D6}</Project>
+      <Name>PerfDemo.DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -58,6 +58,10 @@
     <Compile Include="Migrations\201610192028229_ContactData.Designer.cs">
       <DependentUpon>201610192028229_ContactData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612020739110_PersonalKey.cs" />
+    <Compile Include="Migrations\201612020739110_PersonalKey.Designer.cs">
+      <DependentUpon>201612020739110_PersonalKey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ContactData.cs" />
     <Compile Include="Models\GitHubResume.cs" />
@@ -76,6 +80,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610192028229_ContactData.resx">
       <DependentUpon>201610192028229_ContactData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612020739110_PersonalKey.resx">
+      <DependentUpon>201612020739110_PersonalKey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

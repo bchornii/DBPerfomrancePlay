@@ -30,6 +30,6 @@ namespace PerfDemo.DAL.Models
 
         public DateTime? PiplMatchedDate { get; set; }
 
-		public List<ContactData> Contacts { get; set; }
+		public virtual List<ContactData> Contacts { get; set; }
     }
 }

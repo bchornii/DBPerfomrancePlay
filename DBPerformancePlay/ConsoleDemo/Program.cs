@@ -12,15 +12,10 @@ namespace ConsoleDemo
 	{
 		static void Main(string[] args)
 		{
-			SeedTaskExample();
+			GetResumesFromApi();
 		}
 
-		public static void SeedTaskExample_Sleep()
-		{
-			var m = new One_SeedData();
-			m.SeedDataTuned(true);
-		}
-
+		#region One
 		public static void SeedTaskExample()
 		{
 			var m = new One_SeedData();
@@ -32,6 +27,29 @@ namespace ConsoleDemo
 			var m = new One_SeedData();
 			m.SeedDataTuned();
 		}
+		#endregion
+
+		#region Two
+		public static void GetResumesFromApi()
+		{
+			var m = new Two_LongRequestSim();
+			var r = m.GetResumes();
+		}
+		#endregion
+
+		#region OnePlus
+		public static void OnePlus()
+		{
+			var m = new NplusOne();
+			var r = m.GetResumes();
+		}
+
+		public static void OnePlus_T()
+		{
+			var m = new NplusOne();
+			var r = m.GetResumes_Tuned();
+		}
+		#endregion
 
 		public static void MeasureCall(Action action)
 		{

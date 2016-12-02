@@ -15,6 +15,7 @@ namespace PerfDemo.DAL.Models
 		public int Id { get; set; }
 		public ContactType ContactType { get; set; }
 		public string Data { get; set; }
+		public string PersonalKey { get; set; }
 		public int GitHubResumeId { get; set; }
 		[ForeignKey("GitHubResumeId")]
 		public virtual GitHubResume GitHubResume { get; set; }

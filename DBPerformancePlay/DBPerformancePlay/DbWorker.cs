@@ -8,6 +8,8 @@ using EntityFramework.BulkInsert.Extensions;
 using BenchmarkDotNet.Attributes;
 using PerfDemo.DAL.Models;
 using PerfDemo.DAL;
+using EntityFramework;
+using System.Data.Entity;
 
 namespace DBPerformancePlay
 {
@@ -97,6 +99,12 @@ namespace DBPerformancePlay
 			}
 		}
 
+		public void Seed()
+		{
+			SeedGitUsers(tuned: true);
+			SeedRandomContact();
+		}
+
 		public void SeedRandomContact(int count = 100000)
 		{
 			var rand = new Random();
@@ -113,6 +121,7 @@ namespace DBPerformancePlay
 						if (cd.ContactType == ContactType.Address) cd.Data = Faker.Address.SecondaryAddress();
 						else if (cd.ContactType == ContactType.Email) cd.Data = Faker.User.Email();
 						else cd.Data = Faker.Number.RandomNumber(950000000, 959999999).ToString();
+						cd.PersonalKey = Faker.User.Password(10, true);
 						toSaveList.Add(cd);
 					}
 				}
@@ -121,6 +130,12 @@ namespace DBPerformancePlay
 			}
 		}
 
+		/// <summary>
+		/// Remove example
+		/// </summary>
+		/// <param name="id"></param>
+		/// <param name="tuned"></param>
+		/// <returns></returns>
 		public bool RemoveResume(int id, bool tuned = false)
 		{
 			using (var context = new GitDbContext())
@@ -130,9 +145,40 @@ namespace DBPerformancePlay
 					var item = context.GitHubResumes.Find(id);
 					context.GitHubResumes.Remove(item);
 					context.SaveChanges();
+				} else
+				{
+					var item = new GitHubResume() { Id = id };
+					context.Entry(item).State = System.Data.Entity.EntityState.Deleted;
+					context.SaveChanges();
 				}
 			}
 			return true;
+		}
+
+		public List<GitHubResume> GetResumesWithContacts(bool tuned = false, int count = 1000)
+		{
+			using (var context = new GitDbContext())
+			{
+				IQueryable<GitHubResume> resumes = null;
+				if (!tuned)
+				{
+					resumes = context.GitHubResumes.Where(x => x.Contacts.Any()).Take(count);
+					
+				}
+				else
+				{
+					resumes = context.GitHubResumes.Include(x => x.Contacts).Where(x => x.Contacts.Any()).Take(count);
+				}
+				foreach (var r in resumes)
+				{
+					foreach (var c in r.Contacts)
+					{
+						// hide personal key
+						c.PersonalKey = string.Empty;
+					}
+				}
+				return resumes.ToList();
+			}
 		}
 
 		/// <summary>
