@@ -50,7 +50,7 @@
 			$('#DoAjaxGet').click(function () {
 				$('#DoAjaxGet').prop("disabled", true);
 				counter = 3;
-				var url = "@Url.Action("SessionExampleAsync", "Home")";
+				var url = "@Url.Action("SessionExampleSync", "Home")";
 				getResumes("GET", url);
 				getResumes("GET", url);
 				getResumes("GET", url);

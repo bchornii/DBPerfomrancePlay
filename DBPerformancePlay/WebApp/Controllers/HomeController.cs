@@ -74,5 +74,15 @@ namespace WebApp.Controllers
 				return Json(db.StubData(), JsonRequestBehavior.AllowGet);
 			});
 		}
+
+		[HttpPost]
+		public async Task<JsonResult> SessionExampleAsync(object data)
+		{
+			return await Task.Run<JsonResult>(() => {
+				Session["tick"] = DateTime.Now.Ticks;
+				var db = new DataBal();
+				return Json(db.StubData(), JsonRequestBehavior.AllowGet);
+			});
+		}
 	}
 }
