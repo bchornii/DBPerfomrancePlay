@@ -39,5 +39,18 @@ namespace WebApp.Controllers
 		{
 			return Json(rm.Remove(id));
 		}
-    }
+
+		[HttpPost]
+		public JsonResult GetSuggested()
+		{
+			return Json(rm.GetSuggested());
+		}
+
+		[HttpPost]
+		[OutputCache(Duration = 30, VaryByParam = "none")]
+		public JsonResult GetSuggested_Cache()
+		{
+			return Json(rm.GetSuggested());
+		}
+	}
 }

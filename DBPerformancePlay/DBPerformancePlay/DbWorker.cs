@@ -42,14 +42,24 @@ namespace DBPerformancePlay
 			}
 		}
 
+		public List<GitHubResume> GetSuggestedResumes(int count = 50)
+		{
+			ExecuteComplexQuery();
+			using (var context = new GitDbContext())
+			{
+				context.Configuration.LazyLoadingEnabled = false;
+				return context.GitHubResumes.OrderBy(x => Guid.NewGuid()).Select(x=>x).AsNoTracking().Take(count).ToList();
+			}
+		}
+
 		public int GetResumesCount(bool fast = false)
 		{
 			using (var context = new GitDbContext())
 			{
 				if (fast)
-					return context.GitHubResumes.Count();
+					return context.GitHubResumes.Select(x=>x.Id).Count();
 				else 
-					return context.GitHubResumes.ToList().Count;
+					return context.GitHubResumes.Select(x => x.Id).ToList().Count;
 			}
 		}
 
@@ -157,7 +167,7 @@ namespace DBPerformancePlay
 
 		public List<GitHubResume> GetResumesWithContacts(bool tuned = false, int count = 1000)
 		{
-			using (var context = new GitDbContext())
+			using (var context = new GitDbContext(true))
 			{
 				IQueryable<GitHubResume> resumes = null;
 				if (!tuned)

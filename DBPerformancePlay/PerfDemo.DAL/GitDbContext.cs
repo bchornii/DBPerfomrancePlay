@@ -7,10 +7,10 @@ namespace PerfDemo.DAL
 	using Models;
 	public partial class GitDbContext : DbContext
 	{
-		public GitDbContext()
+		public GitDbContext(bool enableLazy = false)
 			: base("name=GitInfoDB")
 		{
-			this.Configuration.LazyLoadingEnabled = true;
+			this.Configuration.LazyLoadingEnabled = enableLazy;
 		}
 
 		public virtual DbSet<GitHubResume> GitHubResumes { get; set; }

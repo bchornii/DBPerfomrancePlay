@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pre\Four_ComplexQuery.cs" />
     <Compile Include="Pre\NplusOne.cs" />
     <Compile Include="Pre\One_SeedData.cs" />
     <Compile Include="Pre\Two_LongRequestSim.cs" />

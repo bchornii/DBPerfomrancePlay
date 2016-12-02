@@ -18,7 +18,7 @@ namespace PerfDemo.BAL
 		/// <returns></returns>
 		public List<GitHubResume> Get(int count, bool tuned = false)
 		{
-			
+
 			if (tuned)
 			{
 				return dbWorker.GetResumes(count, true);
@@ -31,7 +31,7 @@ namespace PerfDemo.BAL
 		{
 			VerifyUserRole();
 			IsAuthorized();
-			InitUserManager();
+			var serverStateOk = IsServerStateOk;
 			return dbWorker.GetResumesCount(tuned);
 		}
 
@@ -42,7 +42,7 @@ namespace PerfDemo.BAL
 
 		public void VerifyUserRole()
 		{
-			for (var i =0; i< 10000; i++)
+			for (var i = 0; i < 100000; i++)
 			{
 				IsAuthorized();
 				var k = "mess" + i.ToString();
@@ -54,9 +54,20 @@ namespace PerfDemo.BAL
 			var k = 200;
 		}
 
-		public void InitUserManager()
+		public bool IsServerStateOk
 		{
-			// some rtequest to extra service
+			get
+			{
+				// some rtequest to extra service
+				dbWorker.ExecuteComplexQuery();
+				return true;
+			}
+
+		}
+
+		public List<GitHubResume> GetSuggested(int count = 50)
+		{
+			return dbWorker.GetSuggestedResumes(count);
 		}
 	}
 }

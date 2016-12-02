@@ -6,8 +6,59 @@
 	<button class="getFast btn"> Get Resumes count fast</button>
 	<div>Count: <span></span></div>
 </div>
+<hr height="3" />
+<div>
+	<div>
+		<button class="getRandom">Get suggested resumes</button>
+		<button class="getRandomCache">Get suggested resumes cache</button>
+	</div>
+	<div class="results">
+
+	</div>
+</div>
+
+
 @section  scripts{
-<script>
+	<script id="getSuggested">
+		$(document).ready(function () {
+			var getSuggested = function (url) {
+				$.ajax({
+					url: url,
+					type: "POST",
+					dataType: "json",
+					success: function (data) {
+						showResult(data);
+					},
+					error: function () {
+
+					}
+				});
+			}
+			var showResult = function (data) {
+				$('.results').empty();
+				var html = $("<div />");
+				for (var i = 0; i < data.length; i++) {
+					var elem = $("<div />");
+					elem.text(data[i].Name);
+					html.append(elem);
+				}
+				$('.results').append(html);
+			}
+
+			$('.getRandom').click(function () {
+				$('.results').empty();
+				getSuggested("@Url.Action("GetSuggested", "Resume")");
+			});
+			$('.getRandomCache').click(function () {
+				$('.results').empty();
+				getSuggested("@Url.Action("GetSuggested_Cache", "Resume")");
+			})
+
+
+
+		});
+	</script>
+<script id="getCount">
 	$(document).ready(function () {
 		var getCount = function (url, elem) {
 			$.ajax({
